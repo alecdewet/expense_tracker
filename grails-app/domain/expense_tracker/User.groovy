@@ -3,7 +3,7 @@ package expense_tracker
 class User {
 
     String name
-    BigDecimal balance
+    double balance
 
     static constraints = {
     }

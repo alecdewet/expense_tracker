@@ -1,13 +1,15 @@
 package expense_tracker
 
-class Expense {
+class ExpenseRow {
 
+    static mapWith = "none"
+
+    int expenseId
     double amount
     String name
     String description
-    String userName
-    
+    double runningBalance
+
     static constraints = {
-        userName display: false, nullable: true
     }
 }
