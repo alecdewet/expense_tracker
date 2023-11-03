@@ -33,6 +33,7 @@
                             <th>Description</th>
                             <th>Amount</th>
                             <th>Balance</th>
+                            <th>Balance (USD)</th>
                         </tr>
                         <g:each status="i" in="${expenseRowList}" var="row">
                             <tr>
@@ -41,6 +42,7 @@
                                 <td>${row.description}</td>
                                 <td style="text-align: right"><g:formatNumber number="${row.amount}" type="currency" currencySymbol="R"/></td>
                                 <td style="text-align: right"><g:formatNumber number="${row.runningBalance}" type="currency" currencySymbol="R"/></td>
+                                <td style="text-align: right"><g:formatNumber number="${row.runningBalanceUSD}" type="currency" currencyCode="USD"/></td>
                             </tr>
                         </g:each>
                     </table>

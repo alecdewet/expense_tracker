@@ -9,6 +9,7 @@ class ExpenseRow {
     String name
     String description
     double runningBalance
+    double runningBalanceUSD
 
     static constraints = {
     }
@@ -18,6 +19,7 @@ class ExpenseRow {
         name + "," +
         description + "," +
         amount + "," +
-        runningBalance
+        runningBalance + "," +
+        runningBalanceUSD
     }
 }

@@ -8,20 +8,21 @@ class ExpenseController {
     UserService userService
     ExpenseService expenseService
     ExpenseTrackerService expenseTrackerService
+    CurrencyConverterService currencyConverterService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         User user = User.findByName(session.name)
         params.max = Math.min(max ?: 10, 100)
-        List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name})
+        List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name}, currencyConverterService.getExchangeRate())
         [expenseRowList: expenseRows, expenseCount: expenseRows.size(), user: user]
     }
 
     def exportCSV() {
         User user = User.findByName(session.name)
-        List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name})
-        String output = "userName,expenseId,name,description,amount,runningBalance\n"
+        List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name}, currencyConverterService.getExchangeRate())
+        String output = "userName,expenseId,name,description,amount,runningBalance,runningBalanceUSD\n"
         for (row in expenseRows) {
             output += user.name + "," + row.toString() + "\n"
         }

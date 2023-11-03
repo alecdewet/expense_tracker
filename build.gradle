@@ -38,6 +38,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly "io.micronaut:micronaut-inject-groovy"
     console "org.grails:grails-console"
+    // https://mvnrepository.com/artifact/org.grails/grails-datastore-rest-client
+    implementation "org.grails:grails-datastore-rest-client:6.1.12.RELEASE"
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
