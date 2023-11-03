@@ -11,7 +11,6 @@ class ExpenseTrackerService {
         for (expense in expenses) {
             runningBalance -= expense.amount
             ExpenseRow row = new ExpenseRow(expenseId: expense.id, amount: expense.amount, name: expense.name, description: expense.description, runningBalance: runningBalance)
-            println row.expenseId
             expenseRows.add(row)
         }
         return expenseRows

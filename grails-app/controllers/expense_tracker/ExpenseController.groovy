@@ -15,12 +15,22 @@ class ExpenseController {
         User user = User.findByName(session.name)
         params.max = Math.min(max ?: 10, 100)
         List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name})
-
-        for (row in expenseRows) {
-            println(row.expenseId + ", " + row.name + ", " + row.amount + ", " + row.runningBalance)
-        }
-
         [expenseRowList: expenseRows, expenseCount: expenseRows.size(), user: user]
+    }
+
+    def exportCSV() {
+        User user = User.findByName(session.name)
+        List<ExpenseRow> expenseRows = expenseTrackerService.getExpensesWithBalances(user, expenseService.list(params).findAll {it.userName == user.name})
+        String output = "userName,expenseId,name,description,amount,runningBalance\n"
+        for (row in expenseRows) {
+            output += user.name + "," + row.toString() + "\n"
+        }
+        File file = File.createTempFile("expenses",".csv")
+        file.write(output)
+        response.setHeader "Content-disposition", "attachment; filename=${file.name}"
+        response.contentType = 'text-plain'
+        response.outputStream << file.text
+        response.outputStream.flush()
     }
 
     def show(Long id) {

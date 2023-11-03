@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <r:require module="export"/>
         <title>Expense Tracker</title>
     </head>
     <body>
@@ -13,6 +14,7 @@
                     <ul>
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                         <li><g:link class="create" action="create">New Expense</g:link></li>
+                        <li><g:link class="create" action="exportCSV">Export to CSV</g:link></li>
                     </ul>
                 </div>
             </section>

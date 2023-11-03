@@ -12,4 +12,12 @@ class ExpenseRow {
 
     static constraints = {
     }
+
+    String toString() {
+        expenseId + "," +
+        name + "," +
+        description + "," +
+        amount + "," +
+        runningBalance
+    }
 }
