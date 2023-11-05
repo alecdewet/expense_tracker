@@ -14,7 +14,13 @@ class HomeController {
         if (name) {
             session.name = name
         }
-        if (!(User.where { name == name }.count() > 0)) {
+        User user = User.findByName(name)
+        if (user) {
+            if (balance != 0) {
+                user.balance = balance
+                userService.save(user)
+            }
+        } else {
             userService.save(name, balance)
         }
         redirect(controller: "expense", action: 'index')
